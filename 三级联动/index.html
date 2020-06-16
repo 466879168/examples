@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>三级联动</title>
+    <style>
+      select {
+        width: 200px;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="">
+      <select name="province" id="s1">
+        <option value="">请选择</option> </select
+      >省
+      <select name="city" id="s2" disabled="true">
+        <option value="">请选择</option> </select
+      >市
+      <select name="county" id="s3" disabled="true">
+        <option value="">请选择</option> </select
+      >县
+    </form>
+    <script src="./address.js"></script>
+    <script>
+      const forms = document.forms[0];
+      for (let i = 0; i < data.length; i++) {
+        let opt = document.createElement("option");
+        opt.innerHTML = data[i].value;
+        forms.province.appendChild(opt);
+      }
+      //省份发生改变时候触发的方法
+      forms.province.onchange = function () {
+        //根据下标判断当前是否选择了省份
+        if (forms.province.seectedIndex !== 0) {
+          forms.city.disabled = false;
+          let currentCity = [];
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].value === forms.province.value) {
+              currentCity = data[i].children;
+            }
+          }
+        } else {
+        }
+        console.log(forms.province.selectedIndex);
+      };
+    </script>
+  </body>
+</html>
