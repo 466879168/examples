@@ -14,13 +14,13 @@
   <body>
     <form action="">
       <select name="province" id="s1">
-        <option value="">请选择</option> </select
+        <option value="">请选择省</option> </select
       >省
       <select name="city" id="s2" disabled="true">
-        <option value="">请选择</option> </select
+        <option value="">请选择市</option> </select
       >市
       <select name="county" id="s3" disabled="true">
-        <option value="">请选择</option> </select
+        <option value="">请选择区县</option> </select
       >县
     </form>
     <script src="./address.js"></script>
@@ -34,7 +34,9 @@
       //省份发生改变时候触发的方法
       forms.province.onchange = function () {
         //根据下标判断当前是否选择了省份
-        if (forms.province.seectedIndex !== 0) {
+        if (forms.province.selectedIndex !== 0) {
+          forms.city.innerHTML="<option>请选择市</option>"
+          forms.county.innerHTML="<option>请选择区县</option>"
           forms.city.disabled = false;
           let currentCity = [];
           for (let i = 0; i < data.length; i++) {
@@ -42,10 +44,41 @@
               currentCity = data[i].children;
             }
           }
+          for(let i=0; i<currentCity.length; i++){
+            let opt =document.createElement("option")
+            opt.innerHTML=currentCity[i].value
+            forms.city.appendChild(opt)
+          }
         } else {
+          forms.city.disabled=true
+          forms.county.disabled=true
+          forms.city.innerHTML="<option>请选择市</option>"
+          forms.county.innerHTML="<option>请选择区县</option>"
         }
-        console.log(forms.province.selectedIndex);
       };
+      forms.city.onchange=function(){
+        if (forms.city.selectedIndex!=0) {
+          forms.county.innerHTML="<option>请选择区县</option>"
+          forms.county.disabled=false
+          let currentCity=[]
+          let currentCounty=[]
+          for (let i = 0; i < data.length; i++) {
+            for(let j=0; j<data[i].children.length; j++){
+              if (data[i].children[j].value== forms.city.value) {
+                currentCounty=data[i].children[j].children
+              }
+            }
+          }
+          for(let i=0; i<currentCounty.length; i++){
+            let opt=document.createElement("option")
+            opt.innerHTML=currentCounty[i].value
+            forms.county.appendChild(opt)
+          }
+        }else{
+          forms.county.disabled=true
+          forms.county.innerHTML="<option>请选择区县</option>"
+        }
+      }
     </script>
   </body>
 </html>
