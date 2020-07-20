@@ -1,0 +1,35 @@
+input[type="button"]{
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #538cff;
+  background-color: #538cff;
+  padding: 5px 10px;
+}
+input[type="button"]:hover{
+  background-color: #6da3ff;
+}
+
+input[type="text"]{
+  height: 25px;
+  width: 200px;
+}
+
+ul{
+  padding-left: 0;
+}
+
+ul,ol,li{
+  list-style: none;
+}
+#todo-app{
+  width: 600px;
+  margin: 0 auto;
+}
+
+.item{
+  margin-bottom: 10px;
+}
+
+.item span.completed{
+  text-decoration: line-through;
+}
